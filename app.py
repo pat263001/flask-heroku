@@ -38,4 +38,4 @@ def Home(name):
         return render_template('home.html', name_html=name)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
