@@ -16,6 +16,7 @@ def gen_frames():
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+
 data = [
         {
             "id": 1,
@@ -37,21 +38,18 @@ data = [
 @app.route('/')
 def hello():
     return "Hello Flask-Heroku" 
+
 @app.route('/api', methods=['GET'])
 def get_api():
     return jsonify(data)
+
 @app.route('/name')
 def name():
         return"<font color=pink>ปุญชรัสมิ์ จันทร์กลม</font> <br>เลขที่15 <font color=green>ม.4/10</font>"
+
 @app.route('/hello/<string:name>')
 def Home(name):
         return render_template('home.html', name_html=name)
-@app.route('/video')
-def index():
-    return render_template('index.html')
-@app.route('/video_feed')
-def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     app.run(debug=True)
